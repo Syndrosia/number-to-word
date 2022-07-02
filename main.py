@@ -51,8 +51,3 @@ while 2 > 1:
    elif len(var) == 4:
       if var[0] != "0" and var[1] != "0" and var[2] != "0" and var[3] != "0":        
          print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[1] + ",", p[(int(var[1]) - 1)][0] + "-" + t[0], "and", s[(int(var[2]) - 2)][0] + "-" + p[(int(var[3]) - 1)][0])
-
-
-
-
-
