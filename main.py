@@ -6,7 +6,7 @@ while 2 > 1:
    var = input("Enter a number: ")
    
 #resolvers
-   if var == "0" or var == "00" or var == "000" or var == "0000":
+   if var == "0" or var == "00" or var == "000" or var == "0000" or var == "00000" or var == "000000":
       print(" >> zero")
    elif var.startswith("000000"):
       var = var[6:]
@@ -20,6 +20,10 @@ while 2 > 1:
       var = var[2:]
    elif var.startswith("0"):
       var = var[1:]
+
+   # temp
+   if int(var) > 9999:
+      print(" >> Sorry! That number is too large for now. Try again later when the developer updates this script.")
 
    #single digit
    if len(var) == 1:
@@ -51,3 +55,7 @@ while 2 > 1:
    elif len(var) == 4:
       if var[0] != "0" and var[1] != "0" and var[2] != "0" and var[3] != "0":        
          print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[1] + ",", p[(int(var[1]) - 1)][0] + "-" + t[0], "and", s[(int(var[2]) - 2)][0] + "-" + p[(int(var[3]) - 1)][0])
+
+   # decimal numbers
+   
+   # dynamic number finding system (million++)
