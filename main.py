@@ -1,5 +1,10 @@
-# this currently only supports numbers that are smaller than 9999 and doesnt support floats (decimal numbers)
+cfg = [
+   "point", # set to "dot" for an output of "three dot one-four" when you input "3.14"
+   "thousand", # set to "teendrud" for things such as "sixteen-hundred and twenty-three" when you input "1623"
+   False # change to true if you want the first letter to be capital e.g. "Forty-two" when you input "42"
+]
 
+deci = False 
 teen = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "zero"]
 s = [["twenty", 2], ["thirty", 3], ["forty", 4], ["fifty", 5], ["sixty", 6], ["seventy", 7], ["eighty", 8], ["ninty", 9] ]
 p = [["one", 1], ["two", 2], ["three", 3], ["four", 4], ["five", 5], ["six", 6], ["seven", 7], ["eight", 8], ["nine", 9], [""]]
@@ -10,29 +15,47 @@ while 2 > 1:
 #resolvers
    if var == "0" or var == "00" or var == "000" or var == "0000" or var == "00000" or var == "000000":
       print(" >> zero")
-   elif var.startswith("000000"):
+   elif var.startswith("000000") and var.find(".") == -1:
       var = var[6:]
-   elif var.startswith("00000"):
+   elif var.startswith("00000") and var.find(".") == -1:
       var = var[5:]
-   elif var.startswith("0000"):
+   elif var.startswith("0000") and var.find(".") == -1:
       var = var[4:]
-   elif var.startswith("000"): 
+   elif var.startswith("000") and var.find(".") == -1: 
       var = var[3:]
-   elif var.startswith("00"):
+   elif var.startswith("00") and var.find(".") == -1:
       var = var[2:]
-   elif var.startswith("0"):
+   elif var.startswith("0") and var.find(".") == -1:
       var = var[1:]
 
-   # temp
-   if int(var) > 9999:
-      print(" >> Sorry! That number is too large for now. Try again later when the developer updates this script.")
+   # decimal numbers
+   if var.find(".") != -1:
+      deci = True
+      y = []
+      var = var.split(".")
+      if len(var[0]) == 1:
+         if var[0][0] != "0":
+            y.append(p[(int(var[0]) - 1)][0])
+         else:
+            y.append("zero")
+         y.append(cfg[0])
+         for i in range(len(var[1])):
+            if var[1][i] != "0":
+               y.append(p[(int(var[1][i]) - 1)][0])
+            else:
+               y.append("zero")
+         print(" ".join(y))
+         y = []
+      elif len(var[0]) == 2:
+         print("double digit first")
+      deci = False 
 
    #single digit
-   if len(var) == 1:
+   elif len(var) == 1 and deci == False:
       print(" >>", p[(int(var) - 1)][0]) # 8, 2
 
    # two digits
-   elif len(var) == 2:
+   elif len(var) == 2 and deci == False:
       if var[0] == "1": # 16, 11, (teens)
          print(" >>", str(teen[(int(var[1]))]))
       elif var[1] == "0": # 30, 80
@@ -41,7 +64,7 @@ while 2 > 1:
          print(" >>", s[(int(var[0]) - 2)][0] + "-" + p[(int(var[1]) - 1)][0])
 
    # three digits
-   elif len(var) == 3:
+   elif len(var) == 3 and deci == False:
       if var[1] == "1": # 118, 112
          print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], "and", str(teen[(int(var[2]))]))
       elif var[1] == "0" and var[2] == "0": #  200, 600
@@ -54,10 +77,10 @@ while 2 > 1:
          print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], "and", s[(int(var[1]) - 2)][0] + "-" + p[(int(var[2]) - 1)][0])
          
    #four digits
-   elif len(var) == 4:
+   elif len(var) == 4 and deci == False:
       if var[0] != "0" and var[1] != "0" and var[2] != "0" and var[3] != "0":        
          print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[1] + ",", p[(int(var[1]) - 1)][0] + "-" + t[0], "and", s[(int(var[2]) - 2)][0] + "-" + p[(int(var[3]) - 1)][0])
 
-   # decimal numbers
    
    # dynamic number finding system (million++)
+
