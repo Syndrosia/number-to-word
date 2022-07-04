@@ -40,6 +40,8 @@ while 2 > 1:
          var = var[(var.find(".") - 1):]
       else:
          var = var[2:]
+   elif var.startswith("0") and var.find(".") >= 2:
+      var = var[1:]
    elif var.startswith("0") and var.find(".") == -1:
       var = var[1:]
 
@@ -112,5 +114,6 @@ while 2 > 1:
 
    
    # dynamic number finding system (million++)
+
 
 
