@@ -15,23 +15,38 @@ while 2 > 1:
 #resolvers
    if var == "0" or var == "00" or var == "000" or var == "0000" or var == "00000" or var == "000000":
       print(" >> zero")
-   elif var.startswith("000000") and var.find(".") == -1:
-      var = var[6:]
-   elif var.startswith("00000") and var.find(".") == -1:
-      var = var[5:]
-   elif var.startswith("0000") and var.find(".") == -1:
-      var = var[4:]
-   elif var.startswith("000") and var.find(".") == -1: 
-      var = var[3:]
-   elif var.startswith("00") and var.find(".") == -1:
-      var = var[2:]
+   elif var.startswith("000000"):
+      if var.find(".") != -1:
+         var = var[(var.find(".") - 1):]
+      else:
+         var = var[6:]
+   elif var.startswith("00000"):
+      if var.find(".") != -1:
+         var = var[(var.find(".") - 1):]
+      else:
+         var = var[5:]
+   elif var.startswith("0000"):
+      if var.find(".") != -1:
+         var = var[(var.find(".") - 1):]
+      else:
+         var = var[4:]
+   elif var.startswith("000"): 
+      if var.find(".") != -1:
+         var = var[(var.find(".") - 1):]
+      else:
+         var = var[3:]
+   elif var.startswith("00"):
+      if var.find(".") != -1:
+         var = var[(var.find(".") - 1):]
+      else:
+         var = var[2:]
    elif var.startswith("0") and var.find(".") == -1:
       var = var[1:]
 
    # decimal numbers
    if var.find(".") != -1:
       deci = True
-      y = []
+      y, f, h = [], [], []
       var = var.split(".")
       if len(var[0]) == 1:
          if var[0][0] != "0":
@@ -44,10 +59,24 @@ while 2 > 1:
                y.append(p[(int(var[1][i]) - 1)][0])
             else:
                y.append("zero")
-         print(" ".join(y))
+         print(" >>", "-".join(y))
          y = []
       elif len(var[0]) == 2:
-         print("double digit first")
+         for xr in range(len(var[1])):
+            if var[1][xr] != "0":
+               f.append(p[(int(var[1][xr]) - 1)][0])
+            else:
+               f.append("zero")
+         q = " ".join(f)
+         for ko in range(len(var[0])):
+            h.append(var[0][ko])
+         if "".join(h)[0] == "1": 
+            print(" >>", str(teen[(int("".join(h)[1]))]), cfg[0], "-".join(f))
+         elif "".join(h)[1] == "0": 
+            print(" >>", s[(int("".join(h)[0]) - 2)][0], cfg[0], "-".join(f))
+         else: # this code is way too complex
+            print(" >>", (s[(int("".join(h)[0]) - 2)][0] + "-" + p[(int("".join(h)[1]) - 1)][0]), cfg[0], "-".join(f))
+         f, h, y = [], [], []
       deci = False 
 
    #single digit
@@ -83,4 +112,5 @@ while 2 > 1:
 
    
    # dynamic number finding system (million++)
+
 
