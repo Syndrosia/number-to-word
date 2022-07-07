@@ -1,7 +1,6 @@
 cfg = [
    "point", # set to "dot" for an output of "three dot one-four" when you input "3.14"
    "thousand", # set to "teendrud" for things such as "sixteen-hundred and twenty-three" when you input "1623"
-   False # change to true if you want the first letter to be capital e.g. "Forty-two" when you input "42"
 ]
 
 deci = False 
