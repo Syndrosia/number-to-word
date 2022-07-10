@@ -1,6 +1,6 @@
 cfg = [
    "point", # set to "dot" for an output of "three dot one-four" when you input "3.14" and set to "." for an output of "seven . eight-three" when you input "7.83"
-   "thousand", # set to "teendrud" for things such as "sixteen-hundred and twenty-three" when you input "1623"
+   "thousand", # set to "teendred" for things such as "sixteen-hundred and twenty-three" when you input "1623"
 ]
 
 deci = False 
