@@ -1,6 +1,7 @@
 cfg = [
-   "point", # set to "dot" for an output of "three dot one-four" when you input "3.14" and set to "." for an output of "seven . eight-three" when you input "7.83"
-   "thousand", # set to "teendred" for things such as "sixteen-hundred and twenty-three" when you input "1623"
+   "point", # set to "dot" for an output of "three dot one-four" when you input "3.14"
+   "thousand", # set to "teendrud" for things such as "sixteen-hundred and twenty-three" when you input "1623"
+   False # change to true if you want the first letter to be capital e.g. "Forty-two" when you input "42"
 ]
 
 deci = False 
@@ -71,12 +72,12 @@ while 2 > 1:
          q = " ".join(f)
          for ko in range(len(var[0])):
             h.append(var[0][ko])
-         if "".join(h)[0] == "1": 
-            print(" >>", str(teen[(int("".join(h)[1]))]), cfg[0], "-".join(f))
-         elif "".join(h)[1] == "0": 
-            print(" >>", s[(int("".join(h)[0]) - 2)][0], cfg[0], "-".join(f))
-         else: # this code is way too complex
-            print(" >>", (s[(int("".join(h)[0]) - 2)][0] + "-" + p[(int("".join(h)[1]) - 1)][0]), cfg[0], "-".join(f))
+            if "".join(h)[0] == "1": 
+               print(" >>", str(teen[(int("".join(h)[1]))]), cfg[0], "-".join(f))
+            elif "".join(h)[1] == "0": 
+               print(" >>", s[(int("".join(h)[0]) - 2)][0], cfg[0], "-".join(f))
+            else: # this code is way too complex
+               print(" >>", (s[(int("".join(h)[0]) - 2)][0] + "-" + p[(int("".join(h)[1]) - 1)][0]), cfg[0], "-".join(f))
          f, h, y = [], [], []
       deci = False 
 
@@ -113,5 +114,3 @@ while 2 > 1:
 
    
    # dynamic number finding system (million++)
-   
-   
