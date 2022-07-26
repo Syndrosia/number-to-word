@@ -82,7 +82,7 @@ while 2 > 1:
       deci = False 
 
    #single digit
-   elif len(var) == 1 and deci == False:
+   elif len(var) == 1 and deci == False and var[0] != "0":
       print(" >>", p[(int(var) - 1)][0]) # 8, 2
 
    # two digits
