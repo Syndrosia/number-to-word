@@ -77,7 +77,7 @@ while 2 > 1:
          elif "".join(h)[0] == "0": 
             print(" >>", s[(int("".join(h)[0]) - 2)][0], cfg[0], "-".join(f))
          else: # this code is way too complex
-            print(" >>", (s[(int("".join(h)[0]) - 2)][0] + "-" + p[(int("".join(h)[0]) - 1)][0]), cfg[0], "-".join(f))
+            print(" >>", (s[(int("".join(h)[0]) - 2)][0] + "-" + p[(int("".join(h)[1]) - 1)][0]), cfg[0], "-".join(f))
          f, h, y = [], [], []
       deci = False 
 
