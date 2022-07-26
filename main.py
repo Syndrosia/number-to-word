@@ -63,7 +63,7 @@ while 2 > 1:
                y.append("zero")
          print(" >>", "-".join(y))
          y = []
-      elif len(var[0]) == 2:
+      elif len(var[0]) == 2: # two digit
          for xr in range(len(var[1])):
             if var[1][xr] != "0":
                f.append(p[(int(var[1][xr]) - 1)][0])
@@ -72,12 +72,12 @@ while 2 > 1:
          q = " ".join(f)
          for ko in range(len(var[0])):
             h.append(var[0][ko])
-            if "".join(h)[0] == "1": 
-               print(" >>", str(teen[(int("".join(h)[1]))]), cfg[0], "-".join(f))
-            elif "".join(h)[1] == "0": 
-               print(" >>", s[(int("".join(h)[0]) - 2)][0], cfg[0], "-".join(f))
-            else: # this code is way too complex
-               print(" >>", (s[(int("".join(h)[0]) - 2)][0] + "-" + p[(int("".join(h)[1]) - 1)][0]), cfg[0], "-".join(f))
+         if "".join(h)[0] == "1": 
+            print(" >>", str(teen[(int("".join(h)[1]))]), cfg[0], "-".join(f))
+         elif "".join(h)[0] == "0": 
+            print(" >>", s[(int("".join(h)[0]) - 2)][0], cfg[0], "-".join(f))
+         else: # this code is way too complex
+            print(" >>", (s[(int("".join(h)[0]) - 2)][0] + "-" + p[(int("".join(h)[0]) - 1)][0]), cfg[0], "-".join(f))
          f, h, y = [], [], []
       deci = False 
 
@@ -114,3 +114,6 @@ while 2 > 1:
 
    
    # dynamic number finding system (million++)
+
+
+
