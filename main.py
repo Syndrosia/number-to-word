@@ -65,27 +65,29 @@ while 2 > 1:
             else:
                y.append("zero")
          print(" >>", "-".join(y))
-         y = []
       elif len(var[0]) == 2: # two digit
          for xr in range(len(var[1])):
             if var[1][xr] != "0":
                f.append(p[(int(var[1][xr]) - 1)][0])
-            else:
-               f.append("zero")
-         for ko in range(len(var[0])):
-            h.append(var[0][ko])
-         if "".join(h)[0] == "1": 
+            else: # else indents look so lonely
+               f.append("zero") 
+         for ko in range(len(var[0])): # remove for big o notation
+            h.append(var[0][ko]) 
+         if "".join(h)[0] == "1": # o((log n)^k):
             print(" >>", str(teen[(int("".join(h)[1]))]), cfg[0], "-".join(f))
          elif "".join(h)[0] == "0": 
             print(" >>", s[(int("".join(h)[0]) - 2)][0], cfg[0], "-".join(f))
-         else: # this code is way too complex
-            print(" >>", (s[(int("".join(h)[0]) - 2)][0] + "-" + p[(int("".join(h)[1]) - 1)][0]), cfg[0], "-".join(f))
-      elif len(var[0]) == 3: # three digit (DVRST)
-         for msc in range(len(var[1])):
-            if var[1][msc] != "0":
+         else: # this code is very efficient lmao
+            if "".join(h)[1] != "0":
+               print(" >>", s[(int("".join(h)[0]) - 2)][0] + "-" + p[(int("".join(h)[1]) - 1)][0], cfg[0], "-".join(f))
+            else: # forgot to add support for 90, 30 so this will do lol
+               print(" >>", s[(int("".join(h)[0]) - 2)][0] + p[(int("".join(h)[1]) - 1)][0], cfg[0], "-".join(f))
+      elif len(var[0]) == 3: # three digit 
+         for msc in range(len(var[1])): 
+            if var[1][msc] != "0": #gpedit.msc lol
                ran.append(p[int(var[1][msc]) - 1][0])
             else: # "00216.23" skips to [4:] instead of [2:]
-               ran.append("zero") # very basic lol
+               ran.append("zero")
          if var[0][1] == "1": # 218, 714, 410
             print(" >>", p[int(var[0][0]) - 1][0] + "-" + t[0], cfg[3], teen[int(var[0][2])], cfg[0], "-".join(ran))
          elif var[0][1] == "0" and var[0][2] != "0": # 702, 207
@@ -95,14 +97,13 @@ while 2 > 1:
          elif var[0][1] != "0" and var[0][2] == "0": # 520, 860
             print(" >>", p[int(var[0][0]) - 1][0] + "-" + t[0], cfg[3], s[int(var[0][1]) - 2][0], cfg[0], "-".join(ran))
          elif var[0][1] != "1" and var[0][2] != "0" and var[0][1] != "0": # 234, 723
-            print(" >>", p[int(var[0][0]) - 1][0] + "-" + t[0], cfg[3], s[int(var[0][1]) - 1][0], p[int(var[0][2]) - 1][0], cfg[0], "-".join(ran)) 
+            print(" >>", p[int(var[0][0]) - 1][0] + "-" + t[0], cfg[3], s[int(var[0][1]) - 2][0], p[int(var[0][2]) - 1][0], cfg[0], "-".join(ran)) 
       f, h, y, ran = [], [], [], []
       deci = False 
 
    #single digit
    elif len(var) == 1 and deci == False and var[0] != "0":
       print(" >>", p[(int(var) - 1)][0]) # 8, 2
-
    # two digits
    elif len(var) == 2 and deci == False:
       if var[0] == "1": # 16, 11, (teens)
