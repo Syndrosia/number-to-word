@@ -1,7 +1,8 @@
 cfg = [
    "point", # set to "dot" for an output of "three dot one-four" when you input "3.14"
    "thousand", # set to "teendrud" for things such as "sixteen-hundred and twenty-three" when you input "1623"
-   False # change to true if you want the first letter to be capital e.g. "Forty-two" when you input "42"
+   False, # change to true if you want the first letter to be capital e.g. "Forty-two" when you input "42"
+   "and"
 ]
 
 deci = False 
@@ -45,10 +46,12 @@ while 2 > 1:
    elif var.startswith("0") and var.find(".") == -1:
       var = var[1:]
 
+   # add dynamic config resolvers
+
    # decimal numbers
    if var.find(".") != -1:
       deci = True
-      y, f, h = [], [], []
+      y, f, h, ran = [], [], [], []
       var = var.split(".")
       if len(var[0]) == 1:
          if var[0][0] != "0":
@@ -69,7 +72,6 @@ while 2 > 1:
                f.append(p[(int(var[1][xr]) - 1)][0])
             else:
                f.append("zero")
-         q = " ".join(f)
          for ko in range(len(var[0])):
             h.append(var[0][ko])
          if "".join(h)[0] == "1": 
@@ -78,7 +80,23 @@ while 2 > 1:
             print(" >>", s[(int("".join(h)[0]) - 2)][0], cfg[0], "-".join(f))
          else: # this code is way too complex
             print(" >>", (s[(int("".join(h)[0]) - 2)][0] + "-" + p[(int("".join(h)[1]) - 1)][0]), cfg[0], "-".join(f))
-         f, h, y = [], [], []
+      elif len(var[0]) == 3: # three digit (DVRST)
+         for msc in range(len(var[1])):
+            if var[1][msc] != "0":
+               ran.append(p[int(var[1][msc]) - 1][0])
+            else: # "00216.23" skips to [4:] instead of [2:]
+               ran.append("zero") # very basic lol
+         if var[0][1] == "1": # 218, 714, 410
+            print(" >>", p[int(var[0][0]) - 1][0] + "-" + t[0], cfg[3], teen[int(var[0][2])], cfg[0], "-".join(ran))
+         elif var[0][1] == "0" and var[0][2] != "0": # 702, 207
+            print(" >>", p[int(var[0][0]) - 1][0] + "-" + t[0], cfg[3], p[int(var[0][2]) - 1][0], cfg[0], "-".join(ran)) 
+         elif var[0][1] == "0" and var[0][2] == "0": # 200, 900
+            print(" >>", p[int(var[0][0]) - 1][0] + "-" + t[0], cfg[0], "-".join(ran))  
+         elif var[0][1] != "0" and var[0][2] == "0": # 520, 860
+            print(" >>", p[int(var[0][0]) - 1][0] + "-" + t[0], cfg[3], s[int(var[0][1]) - 2][0], cfg[0], "-".join(ran))
+         elif var[0][1] != "1" and var[0][2] != "0" and var[0][1] != "0": # 234, 723
+            print(" >>", p[int(var[0][0]) - 1][0] + "-" + t[0], cfg[3], s[int(var[0][1]) - 1][0], p[int(var[0][2]) - 1][0], cfg[0], "-".join(ran)) 
+      f, h, y, ran = [], [], [], []
       deci = False 
 
    #single digit
@@ -97,21 +115,20 @@ while 2 > 1:
    # three digits
    elif len(var) == 3 and deci == False:
       if var[1] == "1": # 118, 112
-         print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], "and", str(teen[(int(var[2]))]))
+         print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], cfg[3], str(teen[(int(var[2]))]))
       elif var[1] == "0" and var[2] == "0": #  200, 600
          print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0])
       elif var[2] == "0" and var[1] != "0": # 220, 680
-         print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], "and", s[(int(var[1]) - 2)][0])
+         print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], cfg[3], s[(int(var[1]) - 2)][0])
       elif var[2] != "0" and var[1] == "0": # 209, 804
-         print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], "and", p[(int(var[2]) - 1)][0])
+         print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], cfg[3], p[(int(var[2]) - 1)][0])
       else: # 273, 823
-         print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], "and", s[(int(var[1]) - 2)][0] + "-" + p[(int(var[2]) - 1)][0])
+         print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], cfg[3], s[(int(var[1]) - 2)][0] + "-" + p[(int(var[2]) - 1)][0])
          
    #four digits
    elif len(var) == 4 and deci == False:
       if var[0] != "0" and var[1] != "0" and var[2] != "0" and var[3] != "0":        
-         print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[1] + ",", p[(int(var[1]) - 1)][0] + "-" + t[0], "and", s[(int(var[2]) - 2)][0] + "-" + p[(int(var[3]) - 1)][0])
-
+         print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[1] + ",", p[(int(var[1]) - 1)][0] + "-" + t[0], cfg[3], s[(int(var[2]) - 2)][0] + "-" + p[(int(var[3]) - 1)][0])
    
    # dynamic number finding system (million++)
 
