@@ -61,15 +61,13 @@ while 2 > 1:
          for i in range(len(var[1])):
             if var[1][i] != "0":
                y.append(p[(int(var[1][i]) - 1)][0])
-            else: 
-               y.append("zero")
+            else: y.append("zero")
          print(" >>", "-".join(y))
       elif len(var[0]) == 2: # two digit
          for xr in range(len(var[1])):
             if var[1][xr] != "0":
                f.append(p[(int(var[1][xr]) - 1)][0])
-            else: # else indents look so lonely
-               f.append("zero") 
+            else: f.append("zero") 
          for ko in range(len(var[0])): # remove for big o notation
             h.append(var[0][ko]) 
          if "".join(h)[0] == "1": # o((log n)^k):
