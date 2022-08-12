@@ -55,8 +55,7 @@ while 2 > 1:
       if len(var[0]) == 1:
          if var[0][0] != "0":
             y.append(p[(int(var[0]) - 1)][0])
-         else:
-            y.append("zero")
+         else: y.append("zero")
          y.append(cfg[0])
          for i in range(len(var[1])):
             if var[1][i] != "0":
