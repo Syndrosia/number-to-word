@@ -3,17 +3,17 @@ cfg = [
    "thousand", # set to "teendrud" for things such as "sixteen-hundred and twenty-three" when you input "1623"
    "and"
 ]
-
 deci = False 
 teen = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "zero"]
 s = [["twenty", 2], ["thirty", 3], ["forty", 4], ["fifty", 5], ["sixty", 6], ["seventy", 7], ["eighty", 8], ["ninty", 9], ["ten", 0] ]
 p = [["one", 1], ["two", 2], ["three", 3], ["four", 4], ["five", 5], ["six", 6], ["seven", 7], ["eight", 8], ["nine", 9], []]
 t = ["hundred", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion", "septillion", "octillion", "nonillion", "decillion"]
-
 while 2 > 1:
    var = input("Enter a number: ")
-   
-#resolvers
+   #resolvers
+   if len(var) > 4:
+      overrideA = True
+   else: overrideA = False
    if var == "0" or var == "00" or var == "000" or var == "0000" or var == "00000" or var == "000000":
       print(" >> zero")
    elif var.startswith("000000"):
@@ -49,7 +49,7 @@ while 2 > 1:
    # add dynamic config resolvers
 
    # decimal numbers
-   if var.find(".") != -1:
+   if var.find(".") != -1 and not overrideA:
       deci = True
       y, f, h, ran = [], [], [], []
       var = var.split(".")
@@ -97,9 +97,9 @@ while 2 > 1:
             print(" >>", p[int(var[0][0]) - 1][0] + "-" + t[0], cfg[2], s[int(var[0][1]) - 2][0], p[int(var[0][2]) - 1][0], cfg[0], "-".join(ran)) 
       f, h, y, ran = [], [], [], []
       deci = False 
-
+   
    #single digit
-   elif len(var) == 1 and deci == False and var[0] != "0":
+   elif len(var) == 1 and deci == False and var[0] != "0" and not overrideA:
       print(" >>", p[(int(var) - 1)][0]) # 8, 2
    # two digits
    elif len(var) == 2 and deci == False:
@@ -111,7 +111,7 @@ while 2 > 1:
          print(" >>", s[(int(var[0]) - 2)][0] + "-" + p[(int(var[1]) - 1)][0])
 
    # three digits
-   elif len(var) == 3 and deci == False:
+   elif len(var) == 3 and deci == False and not overrideA:
       if var[1] == "1": # 118, 112
          print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], cfg[2], str(teen[(int(var[2]))]))
       elif var[1] == "0" and var[2] == "0": #  200, 600
@@ -124,7 +124,7 @@ while 2 > 1:
          print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[0], cfg[2], s[(int(var[1]) - 2)][0] + "-" + p[(int(var[2]) - 1)][0])
          
    #four digits
-   elif len(var) == 4 and deci == False:
+   elif len(var) == 4 and deci == False and not overrideA:
       if var[2] != "1" and var[1] != "0" and var[2] != "0" and var[3] != "0":        
          print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[1] + ",", p[(int(var[1]) - 1)][0] + "-" + t[0], cfg[2], s[(int(var[2]) - 2)][0] + "-" + p[(int(var[3]) - 1)][0])
       elif var[1] != "0" and var[2] != "0" and var[2] == "1" and var[3] != "0": # 4918, 8213
@@ -143,9 +143,18 @@ while 2 > 1:
          print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[1], cfg[2], s[int(var[2]) - 2][0])
       elif var[1] == "0" and var[2] != "0" and var[2] != "1" and var[3] != "0": # 4024, 5072
          print(" >>", p[(int(var[0]) - 1)][0] + "-" + t[1], cfg[2], s[int(var[2]) - 2][0], p[int(var[3]) - 1][0])
-         
-         
-      # dynamic number finding system (million++)
 
+   if overrideA == True:
+      if var.find(","):
+         var = var.replace(",", "")
+      rs, clone = [], str(var[::-1])
+      for i in range(len(var) // 3):
+         rs.append((clone[0:3])[::-1])
+         clone = clone.replace(clone[0:3], "")
+      rs.insert(len(rs), clone[::-1])
+      rs = rs[::-1]
+      print(rs)
+      
 
+         
 
