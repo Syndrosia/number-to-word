@@ -147,14 +147,33 @@ while 2 > 1:
    if overrideA == True:
       if var.find(","):
          var = var.replace(",", "")
-      rs, clone = [], str(var[::-1])
-      for i in range(len(var) // 3):
+      rs, clone, stack = [], str(var[::-1]), ""
+      for x in range(len(var) // 3):
          rs.append((clone[0:3])[::-1])
          clone = clone.replace(clone[0:3], "")
       rs.insert(len(rs), clone[::-1])
-      rs = rs[::-1]
-      print(rs)
-      
-
-         
-
+      rs, zed, column, com = rs[::-1], "null", len(rs) - 1, ", "
+      for n in range(len(rs)):
+         zed = t[column]
+         column = column - 1
+         if len(rs[n]) == 1:
+            stack = stack + str(p[int(rs[n][0]) - 1][0]) + " " + zed + com
+         elif len(rs[n]) == 2:
+            if rs[n][0] == "1": # 16, 11, (teens)
+               stack = stack + str(teen[(int(rs[n][1]))]) + " " + zed + com
+            elif rs[n][1] == "0": # 30, 80
+               stack = stack + str(s[(int(rs[n][0]) - 2)][0]) + " " + zed + com
+            else: # 82, 47
+               stack = stack + str(s[(int(rs[n][0])) - 2][0] + "-" + p[(int(rs[n][1]) - 1)][0] + " " + zed + com)
+         elif len(rs[n]) == 3:
+            if rs[n][1] == "1": # 118, 112
+               stack = stack + "" + p[(int(rs[n][0]) - 1)][0] + "-" + t[0] + " " + cfg[2] + " " + str(teen[(int(rs[n][2]))]) + " " + zed + com
+            elif rs[n][1] == "0" and rs[n][2] == "0": #  200, 600
+               stack = stack + "" + p[(int(rs[n][0]) - 1)][0] + "-" + t[0] + " " + zed + com
+            elif rs[n][2] == "0" and rs[n][1] != "0": # 220, 680
+               stack = stack + "" + p[(int(rs[n][0]) - 1)][0] + "-" + t[0] + " " + cfg[2] + " " + s[(int(rs[n][1]) - 2)][0] + " " +zed + com
+            elif rs[n][2] != "0" and rs[n][1] == "0": # 209, 804
+               stack = stack + "" + p[(int(rs[n][0]) - 1)][0] + "-" + t[0] + " " + cfg[2] + " " + p[(int(rs[n][2]) - 1)][0] + " " + zed + com
+            else: # 273, 823
+               stack = stack + "" + p[(int(rs[n][0]) - 1)][0] + "-" + t[0] + " " + cfg[2] + " " + s[(int(rs[n][1]) - 2)][0] + "-" + p[(int(rs[n][2]) - 1)][0] + " " + zed + com
+      print(stack[0:(len(stack) - 10)])
