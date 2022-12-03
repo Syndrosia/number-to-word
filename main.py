@@ -157,8 +157,7 @@ while 2 > 1:
       rs.insert(len(rs), clone[::-1])
       rs, zed, column, com = rs[::-1], "null", len(rs) - 1, ", "
       for n in range(len(rs)):
-         zed = t[column]
-         column = column - 1
+         zed, column = t[column], column - 1
          if len(rs[n]) == 1:
             stack = stack + str(p[int(rs[n][0]) - 1][0]) + " " + zed + com
          elif len(rs[n]) == 2:
