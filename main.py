@@ -151,13 +151,18 @@ while 2 > 1:
       if var.find(","):
          var = var.replace(",", "")
       rs, clone, stack = [], str(var[::-1]), ""
+      if clone.find(".") != -1:
+         decimal, obj = clone[0:clone.find(".")][::-1], int(clone.find("."))
+         clone, clone = clone.replace(".", ""), clone[obj + 1:len(clone)]
       for x in range(len(var) // 3):
          rs.append((clone[0:3])[::-1])
          clone = clone.replace(clone[0:3], "")
       rs.insert(len(rs), clone[::-1])
       rs, zed, column, com = rs[::-1], "null", len(rs) - 1, ", "
+      print(rs)
       for n in range(len(rs)):
          zed, column = t[column], column - 1
+         print(rs[n])
          if len(rs[n]) == 1:
             stack = stack + str(p[int(rs[n][0]) - 1][0]) + " " + zed + com
          elif len(rs[n]) == 2:
@@ -178,4 +183,11 @@ while 2 > 1:
                stack = stack + "" + p[(int(rs[n][0]) - 1)][0] + "-" + t[0] + " " + cfg[2] + " " + p[(int(rs[n][2]) - 1)][0] + " " + zed + com
             else: # 273, 823
                stack = stack + "" + p[(int(rs[n][0]) - 1)][0] + "-" + t[0] + " " + cfg[2] + " " + s[(int(rs[n][1]) - 2)][0] + "-" + p[(int(rs[n][2]) - 1)][0] + " " + zed + com
-      print(stack[0:(len(stack) - 10)])
+      stack = stack[0:(len(stack) - 10)]
+      if len(decimal) > 0:
+         stack = stack + " point "
+         for kv in range(len(decimal)): 
+            if decimal[kv] != "0": 
+               stack = stack + p[int(decimal[kv]) - 1][0] + ", "
+            else: stack = stack + "zero, "
+      print(stack)
