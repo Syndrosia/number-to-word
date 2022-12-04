@@ -159,10 +159,8 @@ while 2 > 1:
          clone = clone.replace(clone[0:3], "")
       rs.insert(len(rs), clone[::-1])
       rs, zed, column, com = rs[::-1], "null", len(rs) - 1, ", "
-      print(rs)
       for n in range(len(rs)):
          zed, column = t[column], column - 1
-         print(rs[n])
          if len(rs[n]) == 1:
             stack = stack + str(p[int(rs[n][0]) - 1][0]) + " " + zed + com
          elif len(rs[n]) == 2:
