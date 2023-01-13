@@ -17,22 +17,25 @@ letter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", 
 while 2 > 1:
    var = input("Enter a number: ")
    #resolvers
-   zcount = 0
    if var[0] == "0":
-      for p in range(0, len(var)):
-         if var[p] != "0":
-            zcount = p
-            break
-      var = var[p:]
-   
-   # dynamic 0 begin solver + remover
+      for i in range(len(var)):
+         if var[i] != "0":
+            var = var[i - 1:]
 
-   # add dynamic config resolvers
+   for g in range(len(var)):
+      if var[g] == ".":
+         odin = True
    
-   #single digit
-   
+   if odin == True:
+      for t in range(len(var), 0):
+         if var[t] == "0":
+            var = var[0:len(var) - 1]
+         
    if var.find(","):
       var = var.replace(",", "")
+
+   # conversion
+
    rs, clone, stack, decimal = [], str(var[::-1]), "", ""
    if clone.find(".") != -1:
       decimal, obj = clone[0:clone.find(".")][::-1], int(clone.find("."))
@@ -45,7 +48,7 @@ while 2 > 1:
    for n in range(len(rs)):
       zed, column = t[column], column - 1
       if len(rs[n]) == 1:
-         stack = stack + "" + p[str(rs[n])[0]][0] + " " + zed + com
+         stack = stack + "" + str(p[str(int(rs[n]))[0]][0]) + " " + zed + com
       elif len(rs[n]) == 2:
          if rs[n][0] == "1": # 16, 11, (teens)
             stack = stack + str(teen[(int(rs[n][1]))]) + " " + zed + com
